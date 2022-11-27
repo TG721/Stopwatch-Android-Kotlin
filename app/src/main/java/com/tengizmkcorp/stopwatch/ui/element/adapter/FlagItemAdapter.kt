@@ -1,16 +1,16 @@
 package com.tengizmkcorp.stopwatch.ui.element.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tengizmkcorp.stopwatch.databinding.FlagItemBinding
 import com.tengizmkcorp.stopwatch.ui.element.model.FlagModel
 
 
-class FlagItemAdapter(val items: MutableList<FlagModel>, val deleteFun: (item: FlagModel, pos: Int) -> Unit ) :
+class FlagItemAdapter(
+    val items: MutableList<FlagModel>,
+    val deleteFun: (item: FlagModel, pos: Int) -> Unit,
+) :
     RecyclerView.Adapter<FlagItemAdapter.ItemViewHolder>() {
 
 

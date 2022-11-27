@@ -1,12 +1,6 @@
 package com.tengizmkcorp.stopwatch.ui.element
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.util.Log.d
 import android.view.View
-import androidx.annotation.UiThread
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tengizmkcorp.stopwatch.R
@@ -16,7 +10,6 @@ import com.tengizmkcorp.stopwatch.ui.element.adapter.FlagItemAdapter
 import com.tengizmkcorp.stopwatch.ui.element.common.BaseFragment
 import com.tengizmkcorp.stopwatch.ui.element.model.FlagModel
 import com.tengizmkcorp.stopwatch.ui.viewmodel.StopwatchViewModel
-import java.util.*
 import kotlin.math.roundToInt
 
 class StopwatchFragment :
@@ -24,7 +17,7 @@ class StopwatchFragment :
     private val viewModel: StopwatchViewModel by viewModels()
     private lateinit var flagAdapter: FlagItemAdapter
     private var flagList = mutableListOf<FlagModel>()
-     private lateinit var stopwatchTask: StopwatchTask
+    private lateinit var stopwatchTask: StopwatchTask
     private var timerStarted = false
     var time: Double = 0.0
     override fun setup() {
@@ -33,7 +26,7 @@ class StopwatchFragment :
     }
 
     private fun setupFlagsRecycler() {
-        flagAdapter = FlagItemAdapter(flagList){ item, _ ->
+        flagAdapter = FlagItemAdapter(flagList) { item, _ ->
             flagList.remove(item)
             flagAdapter.notifyDataSetChanged()
         }
@@ -43,13 +36,10 @@ class StopwatchFragment :
     }
 
 
-
     private fun hideButtons() {
         binding.btStop.visibility = View.GONE
         binding.btFlag.visibility = View.GONE
     }
-
-
 
 
     override fun listeners() {
@@ -62,7 +52,7 @@ class StopwatchFragment :
             binding.stopwatchTV.text = "00:00:00:00"
             val listSize = flagList.size
             flagList.clear()
-            flagAdapter.notifyItemRangeRemoved(0,listSize)
+            flagAdapter.notifyItemRangeRemoved(0, listSize)
         }
         binding.btFlag.setOnClickListener {
             flagList.add(FlagModel(binding.stopwatchTV.text.toString()))
@@ -71,11 +61,10 @@ class StopwatchFragment :
     }
 
     private fun startStopWatch() {
-        if(timerStarted)
-        {stopTimer("Pause")
-            showResetButton()}
-        else
-        {
+        if (timerStarted) {
+            stopTimer("Pause")
+            showResetButton()
+        } else {
             setupTask(time)
             startTimer()
             hideResetButton()
@@ -91,9 +80,8 @@ class StopwatchFragment :
     }
 
     private fun setupTask(currentTime: Double) {
-        stopwatchTask = object : StopwatchTask(currentTime)
-        {
-            override fun run(){
+        stopwatchTask = object : StopwatchTask(currentTime) {
+            override fun run() {
                 super.run()
                 requireActivity().runOnUiThread {
                     binding.stopwatchTV.text = getTimeStringFromDouble(time)
@@ -103,7 +91,7 @@ class StopwatchFragment :
     }
 
     private fun stopTimer(pressedButton: String) {
-        time = if(pressedButton=="Pause")
+        time = if (pressedButton == "Pause")
             stopwatchTask.time
         else 0.0
         binding.btPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
@@ -120,7 +108,6 @@ class StopwatchFragment :
     }
 
 
-
     private fun showFlagButton() {
         binding.btFlag.visibility = View.VISIBLE
     }
@@ -128,6 +115,7 @@ class StopwatchFragment :
     private fun makeTimeString(hours: Int, minutes: Int, seconds: Int, milliseconds: Int): String {
         return String.format("%02d:%02d:%02d:%02d", hours, minutes, seconds, milliseconds)
     }
+
     private fun getTimeStringFromDouble(time: Double): String {
         val result = time.roundToInt()
         val hours = result % 8640000 / 360000
@@ -139,4 +127,3 @@ class StopwatchFragment :
     }
 }
 
-//binding.btPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
