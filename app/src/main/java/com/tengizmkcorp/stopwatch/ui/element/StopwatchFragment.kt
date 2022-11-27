@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.view.View
+import androidx.annotation.UiThread
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tengizmkcorp.stopwatch.R
@@ -23,6 +24,7 @@ class StopwatchFragment :
 //    private var flagList = mutableListOf<FlagModel>()
      private lateinit var stopwatchTask: StopwatchTask
     private var timerStarted = false
+    var time: Double = 0.0
     override fun setup() {
         hideButtons()
 //        setupFlagsRecycler()
@@ -48,7 +50,9 @@ class StopwatchFragment :
             startStopWatch()
         }
         binding.btStop.setOnClickListener {
-
+            stopTimer("Stop")
+            hideButtons()
+            binding.stopwatchTV.text = "00:00:00:00"
         }
         binding.btFlag.setOnClickListener {
 //            flagList.add(FlagModel(binding.stopwatchTV.text.toString()))
@@ -58,16 +62,16 @@ class StopwatchFragment :
 
     private fun startStopWatch() {
         if(timerStarted)
-            stopTimer()
+            stopTimer("Pause")
         else
         {
-            setupTask()
+            setupTask(time)
             startTimer()
         }
     }
 
-    private fun setupTask() {
-        stopwatchTask = object : StopwatchTask()
+    private fun setupTask(currentTime: Double) {
+        stopwatchTask = object : StopwatchTask(currentTime)
         {
             override fun run(){
                 super.run()
@@ -78,7 +82,10 @@ class StopwatchFragment :
         }
     }
 
-    private fun stopTimer() {
+    private fun stopTimer(pressedButton: String) {
+        time = if(pressedButton=="Pause")
+            stopwatchTask.time
+        else 0.0
         binding.btPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
         timerStarted = false
         stopwatchTask.timer.cancel()

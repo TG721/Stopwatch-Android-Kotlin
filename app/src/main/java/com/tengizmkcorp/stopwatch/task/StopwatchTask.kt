@@ -5,8 +5,7 @@ import java.util.*
 import kotlin.math.roundToInt
 
 
-open class StopwatchTask():  TimerTask(){
-    var time = 0.0
+open class StopwatchTask( var time: Double = 0.0):  TimerTask(){
     val timer: Timer = Timer()
     override fun run() {
         time++
