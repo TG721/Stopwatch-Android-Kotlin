@@ -62,12 +62,22 @@ class StopwatchFragment :
 
     private fun startStopWatch() {
         if(timerStarted)
-            stopTimer("Pause")
+        {stopTimer("Pause")
+            showResetButton()}
         else
         {
             setupTask(time)
             startTimer()
+            hideResetButton()
         }
+    }
+
+    private fun hideResetButton() {
+        binding.btStop.visibility = View.GONE
+    }
+
+    private fun showResetButton() {
+        binding.btStop.visibility = View.VISIBLE
     }
 
     private fun setupTask(currentTime: Double) {
@@ -94,15 +104,14 @@ class StopwatchFragment :
 
     private fun startTimer() {
         stopwatchTask.timer.scheduleAtFixedRate(stopwatchTask, 0, 10)
-        showButtons()
+        showFlagButton()
         binding.btPlay.setImageResource(R.drawable.ic_baseline_pause_24)
         timerStarted = true
     }
 
 
 
-    private fun showButtons() {
-        binding.btStop.visibility = View.VISIBLE
+    private fun showFlagButton() {
         binding.btFlag.visibility = View.VISIBLE
     }
 
