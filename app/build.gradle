@@ -52,12 +52,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     //recyclerview
     implementation "androidx.recyclerview:recyclerview:1.2.1"
-    // Room components
-    def roomVer = "2.4.3"
-    implementation "androidx.room:room-runtime:$roomVer"
-    kapt "androidx.room:room-compiler:$roomVer"
-    implementation "androidx.room:room-ktx:$roomVer"
-    androidTestImplementation "androidx.room:room-testing:$roomVer"
 
     def fragment_version = "1.5.4"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
