@@ -9,46 +9,37 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tengizmkcorp.stopwatch.databinding.FlagItemBinding
 import com.tengizmkcorp.stopwatch.ui.element.model.FlagModel
 
-class FlagItemAdapter() :
-    ListAdapter<FlagModel, FlagItemAdapter.FlagItemViewHolder>(ItemDiffCallback()) {
 
-    inner class FlagItemViewHolder(private val binding: FlagItemBinding) :
+class FlagItemAdapter(val items: MutableList<FlagModel>, val deleteFun: (item: FlagModel, pos: Int) -> Unit ) :
+    RecyclerView.Adapter<FlagItemAdapter.ItemViewHolder>() {
+
+
+    inner class ItemViewHolder(val binding: FlagItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        fun bind() {
-
-            val source = getItem(absoluteAdapterPosition)
-            binding.apply {
-               textView.text = source.time
+        fun bind(item: FlagModel) {
+            val pos = bindingAdapterPosition
+            binding.textView.text = item.time
+            binding.deleteIV.setOnClickListener {
+                deleteFun(item, pos)
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlagItemViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = FlagItemBinding.inflate(layoutInflater, parent, false)
-        return FlagItemViewHolder(binding)
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        return ItemViewHolder(
+            FlagItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
-    override fun onBindViewHolder(holder: FlagItemViewHolder, position: Int) {
-        return holder.bind()
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        holder.bind(items[position])
     }
 
-
-    private class ItemDiffCallback : DiffUtil.ItemCallback<FlagModel>() {
-        override fun areItemsTheSame(
-            oldItem: FlagModel,
-            newItem: FlagModel,
-        ): Boolean =
-            oldItem.time == newItem.time
-
-        @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(
-            oldItem: FlagModel,
-            newItem: FlagModel,
-        ): Boolean =
-            oldItem == newItem
-
+    override fun getItemCount(): Int {
+        return items.size
     }
 }

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.util.Log.d
 import android.view.View
 import androidx.annotation.UiThread
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import com.tengizmkcorp.stopwatch.databinding.FragmentStopwatchBinding
 import com.tengizmkcorp.stopwatch.task.StopwatchTask
 import com.tengizmkcorp.stopwatch.ui.element.adapter.FlagItemAdapter
 import com.tengizmkcorp.stopwatch.ui.element.common.BaseFragment
+import com.tengizmkcorp.stopwatch.ui.element.model.FlagModel
 import com.tengizmkcorp.stopwatch.ui.viewmodel.StopwatchViewModel
 import java.util.*
 import kotlin.math.roundToInt
@@ -21,21 +23,26 @@ class StopwatchFragment :
     BaseFragment<FragmentStopwatchBinding>(FragmentStopwatchBinding::inflate) {
     private val viewModel: StopwatchViewModel by viewModels()
     private lateinit var flagAdapter: FlagItemAdapter
-//    private var flagList = mutableListOf<FlagModel>()
+    private var flagList = mutableListOf<FlagModel>()
      private lateinit var stopwatchTask: StopwatchTask
     private var timerStarted = false
     var time: Double = 0.0
     override fun setup() {
         hideButtons()
-//        setupFlagsRecycler()
+        setupFlagsRecycler()
     }
 
-//    private fun setupFlagsRecycler() {
-//        flagAdapter = FlagItemAdapter()
-//        val recycler = binding.flagRV
-//        recycler.adapter = flagAdapter
-//        recycler.layoutManager = LinearLayoutManager(requireContext())
-//    }
+    private fun setupFlagsRecycler() {
+        flagAdapter = FlagItemAdapter(flagList){ item, _ ->
+            flagList.remove(item)
+            flagAdapter.notifyDataSetChanged()
+        }
+        val recycler = binding.flagRV
+        recycler.adapter = flagAdapter
+        recycler.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+
 
     private fun hideButtons() {
         binding.btStop.visibility = View.GONE
@@ -53,10 +60,13 @@ class StopwatchFragment :
             stopTimer("Stop")
             hideButtons()
             binding.stopwatchTV.text = "00:00:00:00"
+            val listSize = flagList.size
+            flagList.clear()
+            flagAdapter.notifyItemRangeRemoved(0,listSize)
         }
         binding.btFlag.setOnClickListener {
-//            flagList.add(FlagModel(binding.stopwatchTV.text.toString()))
-//            flagAdapter.submitList(flagList)
+            flagList.add(FlagModel(binding.stopwatchTV.text.toString()))
+            flagAdapter.notifyItemInserted(flagList.size)
         }
     }
 
