@@ -5,10 +5,15 @@ Besides above, user can flag current passed time period
 
 # Instructions
 To start watch click on play/rectangle button.
+
 to pause watch click on pause button.
+
 to reset watch click on rectange/reset button which appears after pausing.
+
 to mark current time press flag button which appears after starting watch.
+
 to delete any flagged/marked time press bin button on the same line as the marked time.
+
 reseting watch cleans flagged times.
 
 # Screenshots 
