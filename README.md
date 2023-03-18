@@ -4,7 +4,7 @@ The User has ability to turn on, pause and reset the watch.
 Besides above, user can flag current passed time period
 
 ## Instructions
-To start watch click on play/rectangle button.
+To start watch click on play/triangle button.
 
 to pause watch click on pause button.
 
