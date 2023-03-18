@@ -17,6 +17,11 @@ to delete any flagged/marked time press bin button on the same line as the marke
 reseting watch cleans flagged times.
 
 ## Screenshots 
-<img src="https://user-images.githubusercontent.com/85778941/204161459-452e1356-e563-4372-bf6d-b14a585e1834.jpg" width="360" height="800" alt="Screenshot_2022-11-28-01-42-02-036_com tengizmkcorp stopwatc">
-<img src="https://user-images.githubusercontent.com/85778941/204161467-f685442b-b63c-4d64-a0a0-e4da864056aa.jpg" width="360" height="800" alt="Screenshot_2022-11-28-01-42-08-813_com tengizmkcorp stopwatch">
-<img src="https://user-images.githubusercontent.com/85778941/204161470-72b05cec-0e54-49a7-9b54-98e04c75bbd3.jpg" width="360" height="800" alt ="Screenshot_2022-11-28-01-42-12-612_com tengizmkcorp stopwatch">
+
+<table>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/85778941/204161459-452e1356-e563-4372-bf6d-b14a585e1834.jpg" width="360" height="800"></td>
+    <td><img src="https://user-images.githubusercontent.com/85778941/204161467-f685442b-b63c-4d64-a0a0-e4da864056aa.jpg" width="360" height="800"></td>
+    <td><img src="https://user-images.githubusercontent.com/85778941/204161470-72b05cec-0e54-49a7-9b54-98e04c75bbd3.jpg" width="360" height="800"></td>
+  </tr>
+ </table>
