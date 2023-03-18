@@ -20,8 +20,8 @@ reseting watch cleans flagged times.
 
 <table>
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/85778941/204161459-452e1356-e563-4372-bf6d-b14a585e1834.jpg" width="360" height="800"></td>
-    <td><img src="https://user-images.githubusercontent.com/85778941/204161467-f685442b-b63c-4d64-a0a0-e4da864056aa.jpg" width="360" height="800"></td>
-    <td><img src="https://user-images.githubusercontent.com/85778941/204161470-72b05cec-0e54-49a7-9b54-98e04c75bbd3.jpg" width="360" height="800"></td>
+    <td><img src="https://user-images.githubusercontent.com/85778941/204161459-452e1356-e563-4372-bf6d-b14a585e1834.jpg" width="288" height="640"></td>
+    <td><img src="https://user-images.githubusercontent.com/85778941/204161467-f685442b-b63c-4d64-a0a0-e4da864056aa.jpg" width="288" height="640"></td>
+    <td><img src="https://user-images.githubusercontent.com/85778941/204161470-72b05cec-0e54-49a7-9b54-98e04c75bbd3.jpg" width="288" height="640"></td>
   </tr>
  </table>
